@@ -85,7 +85,7 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
      - If an image is provided instead, perform a deep visual analysis to estimate layout structure, padding, flexbox alignment, and colors visually.
 2. **Section Type Detection (Page Header Check)**:
    - Analyze if the section is a "Page Header". *Definition: A section featuring a background (image or color) with a main heading + text or breadcrumbs inside, which can be center-aligned or left-aligned.*
-   - **Condition**: If it IS a Page Header, you MUST immediately refer to the specialized rules in `references/page-header.md` and use the template `resources/page-header-2026-04-10.json` for structural guidance.
+   - **Condition**: If it IS a Page Header, **BEFORE PROCEEDING**, you **MUST USE YOUR FILE READING TOOLS (e.g. `read_file`, `view_file`) to explicitly read the content of `references/page-header.md` and `resources/page-header-2026-04-10.json`**. Do NOT construct the JSON from memory. If you do not invoke a tool to read these files, you will fail the task.
 3. **Translate to Elementor Schema**: Map the extracted Auto Layout (or visual structure) to Elementor's Flexbox Container Directives and CSS variables.
 4. **Widget Identification**: Optimize blocks into native Elementor widgets (e.g., Icon Box, Button, Image) to prevent generic div soup.
 5. **Compile JSON (INDIVIDUAL SECTION PRESERVATION)**: 
