@@ -1,0 +1,199 @@
+{
+  "_meta": {
+    "source": "Figma – Singapore Association of Administrative Professionals",
+    "fileKey": "TRCTBLWsuw66vy6ag6I41s",
+    "page": "26-Useful Links",
+    "nodeId": "393-5893",
+    "devStatus": "READY_FOR_DEV",
+    "canvasSize": { "width": 1920, "height": 1422 }
+  },
+
+  "layout_grid": {
+    "columns": 12,
+    "columnWidth": "119.17px",
+    "gutter": "30px",
+    "margin": "80px",
+    "contentWidth": "1280px",
+    "pageWidth": "1920px",
+    "note": "Content area is 1280px centered (320px offset from each side)"
+  },
+
+  "page_structure": [
+    {
+      "name": "Header Navigation",
+      "nodeId": "404:8164",
+      "type": "INSTANCE (Component: Frame 1000003076)",
+      "position": { "x": 0, "y": 0 },
+      "size": { "width": 1920, "height": 97 },
+      "notes": "Shared header component instance, transparent background"
+    },
+    {
+      "name": "Page Header Banner",
+      "nodeId": "393:5921",
+      "type": "RECTANGLE",
+      "position": { "x": 0, "y": 97 },
+      "size": { "width": 1920, "height": 350 },
+      "fills": [
+        { "type": "IMAGE", "scaleMode": "FILL", "imageRef": "c31d9c625858a9f0d4f7474490e0ecd8e27fa506" },
+        { "type": "SOLID", "color": "#000000", "opacity": 0.45 }
+      ],
+      "notes": "Full-width banner image with 45% black overlay (darker than About page which uses 20%)"
+    },
+    {
+      "name": "Page Title / Breadcrumb Group",
+      "nodeId": "393:5922",
+      "type": "GROUP",
+      "position": { "x_offset_from_center": 0, "y": 230 },
+      "size": { "width": 402, "height": 101 },
+      "alignment": "center",
+      "notes": "Title 'Useful Links' + breadcrumb nav, centered on banner. White text on dark overlay."
+    },
+    {
+      "name": "Links Content Card",
+      "nodeId": "393:5894",
+      "type": "RECTANGLE",
+      "position": { "x_offset": 320, "y": 548 },
+      "size": { "width": 1280, "height": 259 },
+      "fills": [
+        { "type": "SOLID", "color": "#FFF9EF", "rgba": "rgba(255, 250, 239, 1)" }
+      ],
+      "stroke": { "color": "#F1F1F1", "width": 2, "visible": false },
+      "borderRadius": 20,
+      "notes": "Cream/peach background card containing two columns of links"
+    },
+    {
+      "name": "Hidden Title - Useful Links",
+      "nodeId": "393:5897",
+      "type": "TEXT",
+      "visible": false,
+      "text": "Useful Links",
+      "typography": {
+        "fontFamily": "Inter",
+        "fontWeight": 500,
+        "fontSize": "48px",
+        "lineHeight": "60px",
+        "letterSpacing": "-0.96px",
+        "textAlign": "center",
+        "color": "#001025"
+      },
+      "notes": "Hidden in design – title text present but not displayed"
+    },
+    {
+      "name": "Left Column Links",
+      "nodeId": "393:5898",
+      "type": "TEXT",
+      "position": { "x_offset": 429, "y": 611 },
+      "size": { "width": 536, "height": 140 },
+      "text": "Central Provident Board (SG)\nEmployment and Employability Institute (E2i)\nExecutive Support Media\nInternational Association of Administrative Professionals (IAAP)",
+      "typography": {
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": "18px",
+        "lineHeight": "35px",
+        "letterSpacing": "0",
+        "textAlign": "left",
+        "color": "#383A3E"
+      },
+      "bullet_icons": {
+        "count": 5,
+        "size": { "width": 17.48, "height": 17 },
+        "position_x_offset": 392,
+        "nodeIds": ["393:5899", "393:5902", "393:5905", "393:5917"],
+        "y_positions_relative_to_frame": [618, 654, 689, 725],
+        "spacing": "~35px (matches line-height)"
+      }
+    },
+    {
+      "name": "Right Column Links",
+      "nodeId": "393:5920",
+      "type": "TEXT",
+      "position": { "x_offset": 1054, "y": 611 },
+      "size": { "width": 291, "height": 140 },
+      "text": "Ministry of Manpower\nMy SkillsFuture\nWorkforce Singapore Agency (SG)\nEON",
+      "typography": {
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": "18px",
+        "lineHeight": "35px",
+        "letterSpacing": "0",
+        "textAlign": "left",
+        "color": "#383A3E"
+      },
+      "bullet_icons": {
+        "count": 4,
+        "size": { "width": 17.48, "height": 17 },
+        "position_x_offset": 1022,
+        "nodeIds": ["393:5908", "393:5911", "393:5914", "405:8211"],
+        "y_positions_relative_to_frame": [618, 654, 689, 724],
+        "spacing": "~35px (matches line-height)"
+      }
+    },
+    {
+      "name": "Footer",
+      "nodeId": "410:8862",
+      "type": "INSTANCE (Component: Component 39)",
+      "position": { "x": 0, "y": 951 },
+      "size": { "width": 1920, "height": 471 },
+      "notes": "Shared footer component instance"
+    }
+  ],
+
+  "design_tokens_used": {
+    "colors": {
+      "page_bg": "#FFFFFF",
+      "card_bg_cream": "#FFF9EF",
+      "link_text": "#383A3E",
+      "heading_navy": "#001025",
+      "banner_overlay_black_45": "rgba(0, 0, 0, 0.45)",
+      "white": "#FFFFFF"
+    },
+    "typography": {
+      "link_item": {
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": "18px",
+        "lineHeight": "35px",
+        "letterSpacing": "0",
+        "color": "#383A3E"
+      },
+      "page_title_hidden": {
+        "fontFamily": "Inter",
+        "fontWeight": 500,
+        "fontSize": "48px",
+        "lineHeight": "60px",
+        "letterSpacing": "-0.96px",
+        "color": "#001025"
+      }
+    },
+    "spacing": {
+      "page_margin": "320px",
+      "banner_height": "350px",
+      "nav_height": "97px",
+      "content_gap_from_banner": "101px (548 - 97 - 350 = 101)",
+      "card_padding_top": "~63px (611 - 548)",
+      "card_padding_left_to_icon": "~72px (392 - 320)",
+      "icon_to_text_gap": "~37px (429 - 392)",
+      "left_col_to_right_col": "~625px (1054 - 429)",
+      "link_line_spacing": "35px"
+    },
+    "radii": {
+      "content_card": "20px"
+    }
+  },
+
+  "content_data": {
+    "page_title": "Useful Links",
+    "links_left_column": [
+      "Central Provident Board (SG)",
+      "Employment and Employability Institute (E2i)",
+      "Executive Support Media",
+      "International Association of Administrative Professionals (IAAP)"
+    ],
+    "links_right_column": [
+      "Ministry of Manpower",
+      "My SkillsFuture",
+      "Workforce Singapore Agency (SG)",
+      "EON"
+    ]
+  }
+}
