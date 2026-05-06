@@ -1,14 +1,18 @@
-# 🔥 STRICT Heading + Icon Box Grid Processing Skill
+# 🔥 STRICT Heading + Image Box Grid Processing Skill
 
-If the target section is a **Heading + Icon Box Grid**, you MUST ABANDON default generative logic and strictly conform to the exact JSON mapping below. Deviating from these rules will break the environment.
+If the target section is a **Heading + Image Box Grid**, you MUST ABANDON default generative logic and strictly conform to the exact JSON mapping below. Deviating from these rules will break the environment.
 
 ## 1. 🏛️ Detection Criteria
-A section qualifies as "Heading + Icon Box Grid" when ALL of the following are true:
+A section qualifies as "Heading + Image Box Grid" when ALL of the following are true:
 - A **centered heading** sits at the top of the section
 - Below the heading is a **grid of cards**, each card containing:
-  - An **SVG icon** at the top
-  - A **text description** below the icon
+  - A **raster image** (PNG or JPEG — not an SVG vector icon) at the top
+  - A **text description** below the image
 - Cards may have a consistent border, shadow, and background color
+
+> **How to distinguish from Heading + Icon Box Grid:**
+> If the card visual asset is a vector/icon → use `heading-with-icon-box-grid.md`.
+> If the card visual asset is a photo, illustration, or bitmap image → use **this file**.
 
 ## 2. 📐 Root Container Settings
 The outer container MUST use these exact settings:
@@ -53,8 +57,8 @@ The grid container MUST use `container_type: "grid"` — NOT a flexbox row. Resp
   "isInner": true,
   "settings": {
     "container_type": "grid",
-    "grid_columns_grid": { "unit": "fr", "size": 5 },
-    "grid_columns_grid_tablet": { "unit": "fr", "size": 3 },
+    "grid_columns_grid": { "unit": "fr", "size": 4 },
+    "grid_columns_grid_tablet": { "unit": "fr", "size": 2 },
     "grid_columns_grid_mobile": { "unit": "fr", "size": 1 },
     "grid_gaps": { "column": "20", "row": "20", "unit": "px" },
     "padding": { "unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": true },
@@ -62,13 +66,13 @@ The grid container MUST use `container_type: "grid"` — NOT a flexbox row. Resp
     "presetTitle": "Grid",
     "presetIcon": "eicon-container-grid"
   },
-  "elements": [ /* icon box card containers here */ ]
+  "elements": [ /* image box card containers here */ ]
 }
 ```
-- Adjust `grid_columns_grid.size` to match the number of columns from Figma (default 5 desktop, 3 tablet, 1 mobile).
+- Adjust `grid_columns_grid.size` to match the number of columns from Figma (default 4 desktop, 2 tablet, 1 mobile for image grids).
 - Do NOT change the `grid_gaps` unless Figma explicitly specifies a different gap.
 
-## 5. 🃏 Each Icon Box Card Container
+## 5. 🃏 Each Image Box Card Container
 Every card is a **column container** with these EXACT structural rules:
 
 ### Border Radius Rule (CRITICAL)
@@ -100,48 +104,44 @@ The top-left corner is always SQUARE (0), the other three corners are rounded (2
       "background_color": "globals/colors?id=7c31574"
     }
   },
-  "elements": [ /* icon widget, then text-editor widget */ ]
+  "elements": [ /* image widget, then text-editor widget */ ]
 }
 ```
 
-## 6. 🎨 The Icon Widget (SVG ONLY — MANDATORY)
+## 6. 🖼️ The Image Widget (PNG/JPEG — MANDATORY)
 
-Icons in this section type are **always SVG**. Never export as PNG or JPEG — SVG preserves crisp edges at all screen sizes and allows CSS color overrides.
+Card images are **raster images** (PNG or JPEG). Never export as SVG — use the `image` widget, not the `icon` widget.
 
-### Icon Resolution Workflow (MANDATORY — do this before building JSON)
-1. Use `figma_get_component_image` with the icon's `nodeId` and **`format: "SVG"`** to export the SVG from Figma.
-2. Upload the SVG to WordPress Media Library via `saap-elementor-mcp`.
+### Image Resolution Workflow (MANDATORY — do this before building JSON)
+1. Use `figma_get_component_image` with the image node's `nodeId` and **`format: "PNG"`** (or `"JPEG"` if the image is photographic) to export from Figma.
+2. Upload to WordPress Media Library via `saap-elementor-mcp`.
 3. Use the resulting WordPress `attachment_id` and `url` in the widget.
 
-❌ Do NOT use `format: "PNG"` or `format: "JPEG"` for icons in this section type.
+❌ Do NOT use `widgetType: "icon"` for this section type.
+❌ Do NOT use `format: "SVG"` for raster card images.
 
 ```json
 {
   "id": "xxxxxxxx",
   "elType": "widget",
-  "widgetType": "icon",
+  "widgetType": "image",
   "isInner": false,
   "settings": {
-    "selected_icon": {
-      "value": {
-        "url": "https://yoursite.com/wp-content/uploads/icon-name.svg",
-        "id": 1155
-      },
-      "library": "svg"
+    "image": {
+      "url": "https://yoursite.com/wp-content/uploads/card-image.png",
+      "id": 1200
     },
-    "icon_color": "#E87A2E",
-    "icon_size": { "unit": "px", "size": 30 },
-    "size": { "unit": "px", "size": 60, "sizes": [] },
-    "__globals__": {
-      "primary_color": "globals/colors?id=e3a9709"
-    }
+    "image_size": "full",
+    "width": { "unit": "px", "size": 80, "sizes": [] },
+    "align": "left",
+    "align_mobile": "center"
   },
   "elements": []
 }
 ```
-- `icon_size` = the visual icon size inside the box (default 30px)
-- `size` = the overall clickable/display box size (default 60px)
-- Always use `"library": "svg"` for uploaded SVGs.
+- `width` = derive from Figma node `size.width` (default 80px if not specified).
+- `align`: use `"left"` to match card's `flex_align_items: "flex-start"`, `"center"` for mobile.
+- `image_size`: always `"full"` to avoid WordPress thumbnail cropping.
 
 ## 7. 📝 The Text Widget
 Use `text-editor` (NOT `heading`) for card body text. Use global tokens — never hardcode color or typography:
@@ -166,7 +166,7 @@ Use `text-editor` (NOT `heading`) for card body text. Use global tokens — neve
 - ✅ Use exact text strings from `content_data` in the Figma metadata.
 
 ## 8. 📌 Optional Footer Text Below Grid
-If the Figma design includes a sub-text or contact note below the grid (e.g. "Please contact our Secretariat..."), add a standalone `text-editor` widget after the grid container:
+If the Figma design includes a sub-text or contact note below the grid, add a standalone `text-editor` widget after the grid container:
 ```json
 {
   "id": "xxxxxxxx",
@@ -189,4 +189,5 @@ If the Figma design includes a sub-text or contact note below the grid (e.g. "Pl
 ```
 
 ## 9. 📖 Referencing the Example
-You MUST view and strictly copy the node structures from `resources/heading-with-icon-box-grid.json` if you are ever unsure of the exact syntax.
+You MUST view and strictly copy the node structures from `resources/heading-with-image-box-grid.json` if you are ever unsure of the exact syntax.
+> ⚠️ If `resources/heading-with-image-box-grid.json` does not exist yet, use `resources/heading-with-icon-box-grid.json` as the structural reference and apply the image widget substitution rules above.

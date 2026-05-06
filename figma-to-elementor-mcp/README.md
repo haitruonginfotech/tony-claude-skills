@@ -20,6 +20,7 @@ Skill chuyển đổi Figma design (qua MCP metadata hoặc screenshot) thành E
 |---|---|---|
 | Page Header | `references/page-header.md` | `resources/page-header-2026-04-10.json` |
 | Heading + Icon Box Grid | `references/heading-with-icon-box-grid.md` | `resources/heading-with-icon-box-grid.json` |
+| Heading + Image Box Grid | `references/heading-with-image-box-grid.md` | `resources/heading-with-image-box-grid.json` *(pending)* |
 | Generic (fallback) | — | — |
 
 ---
@@ -31,12 +32,14 @@ figma-to-elementor-mcp/
 ├── SKILL.md                          # Skill chính (entry point)
 ├── README.md                         # File này
 ├── references/
-│   ├── page-header.md                # Quy tắc bắt buộc cho Page Header
-│   └── heading-with-icon-box-grid.md # Quy tắc bắt buộc cho Heading + Icon Box Grid
+│   ├── page-header.md                 # Quy tắc bắt buộc cho Page Header
+│   ├── heading-with-icon-box-grid.md  # Quy tắc bắt buộc cho Heading + Icon Box Grid
+│   └── heading-with-image-box-grid.md # Quy tắc bắt buộc cho Heading + Image Box Grid
 └── resources/
-    ├── page-header-2026-04-10.json   # Ví dụ JSON thực tế: Page Header
-    ├── heading-with-icon-box-grid.json # Ví dụ JSON thực tế: Icon Box Grid
-    └── figma-page-data.json          # Ví dụ Figma metadata input
+    ├── page-header-2026-04-10.json    # Ví dụ JSON thực tế: Page Header
+    ├── heading-with-icon-box-grid.json  # Ví dụ JSON thực tế: Icon Box Grid
+    ├── heading-with-image-box-grid.json # Ví dụ JSON thực tế: Image Box Grid (pending)
+    └── figma-page-data.json           # Ví dụ Figma metadata input
 ```
 
 ---
@@ -51,6 +54,15 @@ figma-to-elementor-mcp/
 ---
 
 ## Changelog
+
+### v1.05 — 2026-05-05
+- Thêm section type mới: **Heading + Image Box Grid**
+  - Tạo `references/heading-with-image-box-grid.md`
+  - Khác biệt với Icon Box Grid: dùng `widgetType: "image"` thay vì `widgetType: "icon"`, export `format: "PNG"` thay vì `"SVG"`
+  - Grid mặc định 4→2→1 columns (image cards rộng hơn icon cards)
+  - Thêm hướng dẫn phân biệt Icon vs Image trong detection criteria
+- SKILL.md: thêm "Heading + Image Box Grid" vào danh sách Section Type Detection kèm ghi chú phân biệt vector/raster
+- README.md: cập nhật bảng section types và cấu trúc thư mục
 
 ### v1.04 — 2026-05-05
 - **Bắt buộc SVG** cho icon trong section Heading + Icon Box Grid (không dùng PNG/JPEG)

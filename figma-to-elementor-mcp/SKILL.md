@@ -117,9 +117,17 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
      *Definition: A full-width banner with a background image or color, containing a main heading and optional breadcrumbs. Center- or left-aligned.*
      **Trigger**: If detected, **MUST read** `references/page-header.md` AND `resources/page-header-2026-04-10.json` before writing any JSON.
 
-   - **Heading + Icon Box Grid**
-     *Definition: A section with a centered heading at the top, followed by a grid of cards where each card contains an icon (SVG/image) and a text description below it.*
-     **Trigger**: If detected, **MUST read** `references/heading-with-icon-box-grid.md` AND `resources/heading-with-icon-box-grid.json` before writing any JSON.
+   - **Icon Box Grid**
+     *Definition: A section with a centered heading at the top, followed by a grid of cards where each card contains a **small, transparent/monochrome SVG icon** (typically 30–60px) and a text description below it.*
+     **Trigger**: If detected, **MUST read** `references/icon-box-grid.md` AND `resources/elementor-icon-box-grid-304-2026-05-06.json` before writing any JSON.
+
+   - **Image Box Grid**
+     *Definition: A section with a centered heading at the top, followed by a grid of cards where each card contains a **large raster image** (PNG/JPEG photo or illustration that fills a significant portion of the card) and a text description below it.*
+     **Trigger**: If detected, **MUST read** `references/heading-with-image-box-grid.md` AND `resources/heading-with-image-box-grid.json` (if exists) before writing any JSON.
+
+   > **Icon vs Image distinction:**
+   > - **Icon Box**: graphic is small (30–60px), sits on transparent or flat-color background, monochrome or flat-color SVG → **Icon Box Grid**
+   > - **Image Box**: graphic is a large photo or illustration filling most of the card area, raster format → **Image Box Grid**
 
    - **Generic Section** (fallback)
      If the section does not match any pattern above, proceed with the general mapping rules in Section 🧠 above.
