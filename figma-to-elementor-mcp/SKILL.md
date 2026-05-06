@@ -122,8 +122,8 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
      **Trigger**: If detected, **MUST read** `references/icon-box-grid.md` AND `resources/elementor-icon-box-grid-304-2026-05-06.json` before writing any JSON.
 
    - **Image Box Grid**
-     *Definition: A section with a centered heading at the top, followed by a grid of cards where each card contains a **large raster image** (PNG/JPEG photo or illustration that fills a significant portion of the card) and a text description below it.*
-     **Trigger**: If detected, **MUST read** `references/heading-with-image-box-grid.md` AND `resources/heading-with-image-box-grid.json` (if exists) before writing any JSON.
+     *Definition: A section with a centered heading at the top, followed by a grid of cards where each card contains a **large raster image** (PNG/JPEG photo or illustration that fills the full card width) and a title + description below it. Often has a dark or colored background.*
+     **Trigger**: If detected, **MUST read** `references/image-box-grid.md` AND `resources/elementor-image-box-grid-424-2026-05-06.json` before writing any JSON.
 
    > **Icon vs Image distinction:**
    > - **Icon Box**: graphic is small (30–60px), sits on transparent or flat-color background, monochrome or flat-color SVG → **Icon Box Grid**
