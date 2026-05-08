@@ -33,17 +33,57 @@ Translate the parsed JSON arrays (`page_structure`, `layout_grid`) from the MCP 
 #### 🖼️ Image Resolution Workflow (MANDATORY for IMAGE fills)
 When a node contains an `IMAGE` fill (identified by `"type": "IMAGE"` or an `imageRef` hash in the metadata), you MUST follow this exact sequence — do NOT use placeholders unless all steps fail:
 
+**⚠️ Step 0 — Pre-check for overlay fills (CRITICAL — do this before exporting):**
+Before calling `figma_get_component_image`, inspect the node's `fills` array via `figma_get_component_for_development`. A background node often has **multiple fills stacked**: an IMAGE fill PLUS one or more SOLID fills used as a dark/color overlay (e.g. `{ type: "SOLID", color: {r:0,g:0,b:0}, opacity: 0.4 }`).
+
+`figma_get_component_image` renders ALL fills into a single PNG — the overlay gets permanently baked into the exported image. This breaks Elementor's background overlay feature and makes it impossible to adjust opacity later.
+
+**When multiple fills are detected (IMAGE + SOLID overlay):**
+
+- Note the SOLID fill's `color` and `opacity` — you'll need these values for the Elementor overlay settings.
+- If multiple nodes overlap at the same position (e.g. two background rectangles stacked), prefer the node with **`scaleMode: "FILL"`** and the higher node ID — this is typically the designer's most recent, intended version.
+
+**Path A — Figma Desktop Bridge connected in Design mode** (cleanest output):
+1. Use `figma_execute` to temporarily hide all SOLID overlay fills on the node:
+   ```js
+   const node = await figma.getNodeByIdAsync("NODE_ID");
+   const fills = [...node.fills];
+   node.fills = fills.map((f, i) => i === 0 ? f : { ...f, visible: false });
+   return { ok: true };
+   ```
+2. Proceed to Step 1 to export the clean photo.
+3. After upload, restore the overlay fills:
+   ```js
+   const node = await figma.getNodeByIdAsync("NODE_ID");
+   const fills = [...node.fills];
+   node.fills = fills.map(f => ({ ...f, visible: true }));
+   return { ok: true };
+   ```
+4. In the Elementor JSON, apply the overlay via container settings (NOT as a baked-in image):
+   ```json
+   "background_overlay_background": "classic",
+   "background_overlay_color": "#000000",
+   "background_overlay_opacity": { "unit": "px", "size": 0.4, "sizes": [] }
+   ```
+   Use the `opacity` value from the Figma SOLID fill.
+
+**Path B — Desktop Bridge in Dev mode (read-only) or not connected:**
+- Export the node as-is (overlay will be baked into the PNG).
+- Do NOT add any Elementor background overlay on top — the image is already darkened.
+- The result is visually approximate. For pixel-perfect output, ask the user to switch Figma to Design mode and rerun via Path A.
+- To check which mode is active: call `figma_get_status` and check `editorType` — `"design"` = write access, `"dev"` = read-only.
+
 **Step 1 — Export image from Figma via MCP:**
-Call `figma_get_component_image` with the node's `nodeId` (available in `page_structure`):
+Call `figma_get_component_image` with the node's `nodeId`. If multiple fill-only nodes overlap at the same position, prefer the one with `scaleMode: "FILL"`:
 ```
-figma_get_component_image(nodeId: "393:5921", format: "PNG", scale: 2)
+figma_get_component_image(nodeId: "208:463", format: "PNG", scale: 2)
 ```
 This returns a **temporary Figma S3 URL** (valid ~30 days).
 
 **Step 2 — Upload to WordPress Media Library:**
-Call the `saap-elementor-mcp` (or the relevant WordPress MCP for the current site) to upload the image and get a permanent WordPress URL:
+Call `elementor-mcp-sideload-image` (or the relevant WordPress MCP for the current site) to upload the image:
 ```
-upload_media_from_url(url: "<figma_s3_url>", filename: "section-bg.png")
+elementor-mcp-sideload-image(url: "<figma_s3_url>", title: "section-bg")
 ```
 This returns a WordPress `attachment_id` and permanent `url`.
 
@@ -56,7 +96,7 @@ Use the permanent WordPress URL (never the Figma S3 URL) in the `background_imag
 }
 ```
 
-**Fallback** (only if MCP tools are unavailable or all steps fail): use a placeholder URL (`https://placehold.co/1920x1080?text=Figma+Image+Placeholder`) and leave a `// TODO: replace with real image` comment in the JSON.
+**Fallback** (only if MCP tools are unavailable or all steps fail): use a placeholder URL (`https://placehold.co/1920x1080?text=Figma+Image+Placeholder`). Do NOT add any comment inside the JSON — comments are invalid in JSON and will break import. Notify the user in your text response that this placeholder must be replaced with a real image.
 
 ### 2. Styling (Design Tokens & Typography)
 - **Colors** (`design_tokens_used.colors`): Extract hex/rgba keys. Map to Elementor `background_color`, borders, or typography colors. 
@@ -125,6 +165,10 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
      *Definition: A section with a centered heading at the top, followed by a grid of cards where each card contains a **large raster image** (PNG/JPEG photo or illustration that fills the full card width) and a title + description below it. Often has a dark or colored background.*
      **Trigger**: If detected, **MUST read** `references/image-box-grid.md` AND `resources/elementor-image-box-grid-424-2026-05-06.json` before writing any JSON.
 
+   - **Split Hero**
+     *Definition: A two-column horizontal section — one column is a large image, the other contains text content (heading, body text, and/or button). Either image-left/text-right or text-left/image-right.*
+     **Trigger**: If detected, **MUST read** `references/split-hero.md` AND `resources/elementor-split-hero-763-2026-05-08.json` before writing any JSON.
+
    > **Icon vs Image distinction:**
    > - **Icon Box**: graphic is small (30–60px), sits on transparent or flat-color background, monochrome or flat-color SVG → **Icon Box Grid**
    > - **Image Box**: graphic is a large photo or illustration filling most of the card area, raster format → **Image Box Grid**
@@ -136,7 +180,7 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
 
 3. **Image Resolution (BEFORE building JSON)**:
    - Scan all nodes in `page_structure` for `IMAGE` fills or `imageRef` values.
-   - For each image found, execute the **Image Resolution Workflow** (Step 1→2→3 above) to obtain a permanent WordPress URL **before** writing the Elementor JSON.
+   - For each image found, execute the **Image Resolution Workflow** (Step 0→1→2→3 above) to obtain a permanent WordPress URL **before** writing the Elementor JSON.
    - This ensures the final JSON contains real, permanent URLs — not Figma S3 links that expire.
 
 4. **Translate to Elementor Schema**: Map the extracted Auto Layout (or visual structure) to Elementor's Flexbox Container Directives and CSS variables.
