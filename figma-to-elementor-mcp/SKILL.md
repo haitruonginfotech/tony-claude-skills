@@ -169,6 +169,14 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
      *Definition: A two-column horizontal section — one column is a large image, the other contains text content (heading, body text, and/or button). Either image-left/text-right or text-left/image-right.*
      **Trigger**: If detected, **MUST read** `references/split-hero.md` AND `resources/elementor-split-hero-763-2026-05-08.json` before writing any JSON.
 
+   - **Centered Text Hero**
+     *Definition: A full-width section with a background image, where all content (heading, body text, button) is centered both horizontally and vertically in a single column. No column split. Used as a standalone promotional or CTA banner.*
+     **Trigger**: If detected, **MUST read** `references/centered-text-hero.md` AND `resources/elementor-centered-text-hero-842-2026-05-11.json` before writing any JSON.
+
+   - **List**
+     *Definition: A section with multiple items stacked vertically, each item being a two-column row (image ~48% left + text block ~48% right), separated by dividers. Text block typically contains a main title, optional subtitle, body text, and a button.*
+     **Trigger**: If detected, **MUST read** `references/list.md` AND `resources/elementor-list-889-2026-05-11.json` before writing any JSON.
+
    > **Icon vs Image distinction:**
    > - **Icon Box**: graphic is small (30–60px), sits on transparent or flat-color background, monochrome or flat-color SVG → **Icon Box Grid**
    > - **Image Box**: graphic is a large photo or illustration filling most of the card area, raster format → **Image Box Grid**
