@@ -177,6 +177,10 @@ Even if Figma only provides Desktop metadata, inject logical responsive defaults
      *Definition: A section with multiple items stacked vertically, each item being a two-column row (image ~48% left + text block ~48% right), separated by dividers. Text block typically contains a main title, optional subtitle, body text, and a button.*
      **Trigger**: If detected, **MUST read** `references/list.md` AND `resources/elementor-list-889-2026-05-11.json` before writing any JSON.
 
+   - **Accordion**
+     *Definition: A collapsible list of items (FAQ, features, Q&A) where each item has a clickable title that expands to reveal content. Items are stacked vertically with a divider between them and a toggle icon (plus/minus) at the right of each title.*
+     **Trigger**: If detected anywhere inside the section, **MUST read** `references/accordion.md` AND `resources/elementor-accordion-995-2026-05-13.json` before writing any JSON.
+
    > **Icon vs Image distinction:**
    > - **Icon Box**: graphic is small (30–60px), sits on transparent or flat-color background, monochrome or flat-color SVG → **Icon Box Grid**
    > - **Image Box**: graphic is a large photo or illustration filling most of the card area, raster format → **Image Box Grid**

@@ -1,0 +1,181 @@
+"elements": [
+      {
+        "id": "28582cad",
+        "settings": {
+          "items": [
+            {
+              "item_title": "What do I need to prepare before using the equipment?",
+              "_id": "e36b679"
+            },
+            {
+              "item_title": "How does self-collection work?",
+              "_id": "43d0852"
+            },
+            {
+              "item_title": "Can the equipment fit in my car?",
+              "_id": "e2a6b30"
+            }
+          ],
+          "accordion_item_title_position_horizontal": "stretch",
+          "accordion_item_title_icon_position": "end",
+          "accordion_item_title_icon": {
+            "value": {
+              "url": "https://hausparty.local/wp-content/uploads/2026/05/icon-plus.svg",
+              "id": 982
+            },
+            "library": "svg"
+          },
+          "accordion_item_title_icon_active": {
+            "value": {
+              "url": "https://hausparty.local/wp-content/uploads/2026/05/icon-minus.svg",
+              "id": 984
+            },
+            "library": "svg"
+          },
+          "faq_schema": "",
+          "accordion_border_normal_border": "none",
+          "accordion_padding": {
+            "unit": "px",
+            "top": "12",
+            "right": "0",
+            "bottom": "12",
+            "left": "0",
+            "isLinked": false
+          },
+          "accordion_padding_tablet": {
+            "unit": "px",
+            "top": "11",
+            "right": "0",
+            "bottom": "11",
+            "left": "0",
+            "isLinked": false
+          },
+          "accordion_padding_mobile": {
+            "unit": "px",
+            "top": "10",
+            "right": "0",
+            "bottom": "10",
+            "left": "0",
+            "isLinked": false
+          },
+          "icon_size": {
+            "unit": "px",
+            "size": 12,
+            "sizes": []
+          },
+          "content_border_border": "none",
+          "custom_css": "selector .e-n-accordion .e-n-accordion-item+.e-n-accordion-item {\n    border-top: 1px solid #5F5F5F;\n}\nselector .e-n-accordion-item[open] div[aria-labelledby^=\"e-n-accordion-item-\"] {\n    padding-bottom: 16px;\n}",
+          "__globals__": {
+            "title_typography_typography": "globals/typography?id=primary",
+            "normal_title_color": "globals/colors?id=primary",
+            "hover_title_color": "globals/colors?id=accent",
+            "active_title_color": "globals/colors?id=primary",
+            "normal_icon_color": "globals/colors?id=primary",
+            "hover_icon_color": "globals/colors?id=accent",
+            "active_icon_color": "globals/colors?id=primary"
+          },
+          "_title": "Accordion"
+        },
+        "elements": [
+          {
+            "id": "490fc019",
+            "settings": {
+              "_title": "item #1",
+              "content_width": "full",
+              "padding": {
+                "unit": "px",
+                "top": "0",
+                "right": "0",
+                "bottom": "0",
+                "left": "0",
+                "isLinked": true
+              }
+            },
+            "elements": [
+              {
+                "id": "aa1683c",
+                "settings": {
+                  "__globals__": {
+                    "link_color": "globals/colors?id=text"
+                  }
+                },
+                "elements": [],
+                "isInner": false,
+                "widgetType": "text-editor",
+                "elType": "widget"
+              }
+            ],
+            "isInner": true,
+            "elType": "container",
+            "isLocked": true
+          },
+          {
+            "id": "22a2244e",
+            "settings": {
+              "_title": "item #2",
+              "content_width": "full",
+              "padding": {
+                "unit": "px",
+                "top": "0",
+                "right": "0",
+                "bottom": "0",
+                "left": "0",
+                "isLinked": true
+              }
+            },
+            "elements": [
+              {
+                "id": "306ac203",
+                "settings": {
+                  "__globals__": {
+                    "link_color": "globals/colors?id=text"
+                  }
+                },
+                "elements": [],
+                "isInner": false,
+                "widgetType": "text-editor",
+                "elType": "widget"
+              }
+            ],
+            "isInner": true,
+            "elType": "container",
+            "isLocked": true
+          },
+          {
+            "id": "3bba5334",
+            "settings": {
+              "_title": "item #3",
+              "content_width": "full",
+              "padding": {
+                "unit": "px",
+                "top": "0",
+                "right": "0",
+                "bottom": "0",
+                "left": "0",
+                "isLinked": true
+              }
+            },
+            "elements": [
+              {
+                "id": "461bc9b1",
+                "settings": {
+                  "__globals__": {
+                    "link_color": "globals/colors?id=text"
+                  }
+                },
+                "elements": [],
+                "isInner": false,
+                "widgetType": "text-editor",
+                "elType": "widget"
+              }
+            ],
+            "isInner": true,
+            "elType": "container",
+            "isLocked": true
+          }
+        ],
+        "isInner": false,
+        "widgetType": "nested-accordion",
+        "elType": "widget"
+      }
+    ]
